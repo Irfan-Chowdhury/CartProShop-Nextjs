@@ -2,9 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { getCommonHeaderData } from "@/server/setting";
 
-export default async function Home({ cartCount }) {
+export default async function Header({ cartCount }) {
 
-  const storefrontSetting = await getCommonHeaderData();
+  const headerData = await getCommonHeaderData();
+
 
   return (
     <header>
@@ -14,14 +15,14 @@ export default async function Home({ cartCount }) {
           <div className="d-lg-flex d-xl-flex justify-content-between">
             <div className="header-top-left d-none d-lg-flex d-xl-flex">
               <ul className="header-top-social menu">
-                <li><a href={storefrontSetting.headerFacebookLink}><i className="ti-facebook"></i></a></li>
-                <li><a href={storefrontSetting.headerTwitterLink}><i className="ti-instagram"></i></a></li>
-                <li><a href={storefrontSetting.headerInstagramLink}><i className="ti-twitter"></i></a></li>
-                <li><a href={storefrontSetting.headerYoutubeLink}><i className="ti-youtube"></i></a></li>
+                <li><a href={headerData.headerFacebookLink}><i className="ti-facebook"></i></a></li>
+                <li><a href={headerData.headerTwitterLink}><i className="ti-instagram"></i></a></li>
+                <li><a href={headerData.headerInstagramLink}><i className="ti-twitter"></i></a></li>
+                <li><a href={headerData.headerYoutubeLink}><i className="ti-youtube"></i></a></li>
               </ul>
             </div>
             <div className="header-top-middle d-none d-lg-flex d-xl-flex">
-              <span className="announcement">{storefrontSetting.welcomeTitle}</span>
+              <span className="announcement">{headerData.welcomeTitle}</span>
             </div>
             <div className="header-top-right"></div>
           </div>
@@ -36,7 +37,7 @@ export default async function Home({ cartCount }) {
               <div className="mobile-menu-icon d-lg-none"><i className="ti-menu"></i></div>
               <div className="logo">
                 <Link href="/">
-                  <img src={storefrontSetting.headerLogoPath} alt="Brand logo" />
+                  <img src={headerData.headerLogoPath} alt="Brand logo" />
                 </Link>
               </div>
             </div>
@@ -84,10 +85,10 @@ export default async function Home({ cartCount }) {
                       <i className="ti-menu"></i> Shop By Category
                     </a>
                     <ul id="cat_menu" className="dropdown p-0">
-                        {storefrontSetting.categoryMenuList.map(category => (
+                        {headerData.categoryMenuList.map(category => (
                             <li key={category.id} className={category.subCategoryMenus.length > 0 ? "has-dropdown" : ""}>
                               <a href="/"><i className={category.icon}></i>{category.categoryName} ({category.totalProducts})</a>
-                              {category.subCategoryMenus.length > 0 && (
+                              {category.subCategoryMenus?.length > 0 && (
                                 <ul className="dropdown">
                                     {category.subCategoryMenus.map((subCategory) => (
                                         <li key={subCategory.id}>
@@ -123,6 +124,15 @@ export default async function Home({ cartCount }) {
                         <ul className="pl-0">
                           <li><Link href="/">Home</Link></li>
                           <li><Link href="/">All Categories</Link></li>
+
+                          {headerData?.storefrontShopPageEnabled === "1"	&& (
+                            <li><Link href="/">Shops</Link></li>
+                          )}
+
+                          {headerData?.storefrontBrandPageEnabled === "1"	&& (
+                            <li><Link href="/">Brands</Link></li>
+                          )}
+
                           <li className="deal-menu-item">
                             <Link href="/"><i className="las la-tag d-none d-md-inline-block"></i>Daily Deals</Link>
                           </li>
