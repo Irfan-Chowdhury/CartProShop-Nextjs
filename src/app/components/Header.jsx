@@ -124,6 +124,7 @@ export default async function Header({ cartCount }) {
                         <ul className="pl-0">
                           <li><Link href="/">Home</Link></li>
                           <li><Link href="/">All Categories</Link></li>
+                          <li><Link href="/faq">FAQ</Link></li>
 
                           {headerData?.storefrontShopPageEnabled === "1"	&& (
                             <li><Link href="/">Shops</Link></li>
@@ -132,6 +133,7 @@ export default async function Header({ cartCount }) {
                           {headerData?.storefrontBrandPageEnabled === "1"	&& (
                             <li><Link href="/">Brands</Link></li>
                           )}
+
 
                           <li className="deal-menu-item">
                             <Link href="/"><i className="las la-tag d-none d-md-inline-block"></i>Daily Deals</Link>
