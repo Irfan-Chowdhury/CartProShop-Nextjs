@@ -114,21 +114,61 @@
 
     $(document).ready(function(){
 
-        $(".banner-slider").slick({
-            autoplay:true,
-            autoplaySpeed:3000,
-            speed:300,
-            slidesToShow:1,
-            slidesToScroll:1,
-            pauseOnHover:true,
-            dots:true,
-            pauseOnDotsHover:true,
-            cssEase:'linear',
-            // fade:true,
-            draggable:true,
-            prevArrow:'<button class="PrevArrow"></button>',
-            nextArrow:'<button class="NextArrow"></button>',
-        });
+        if ($.fn.slick) {
+            $(".banner-slider").slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                pauseOnHover: true,
+                dots: true,
+                pauseOnDotsHover: true,
+                cssEase: 'linear',
+                draggable: true,
+                prevArrow: '<button class="PrevArrow"></button>',
+                nextArrow: '<button class="NextArrow"></button>',
+            });
+
+            $(".slider-for").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                fade: true,
+                asNavFor: ".slider-nav",
+                nextArrow: '<div class="slick-next"><i class="las la-angle-right"></i></div>',
+                prevArrow: '<div class="slick-prev"><i class="las la-angle-left"></i></div>',
+            });
+
+            $(".slider-nav").slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: ".slider-for",
+                dots: false,
+                focusOnSelect: true,
+                arrows: false,
+                vertical: true,
+            });
+
+            console.log("Slick initialized successfully!");
+        } else {
+            console.error("Slick.js is not loaded!");
+        }
+
+        // $(".banner-slider").slick({
+        //     autoplay:true,
+        //     autoplaySpeed:3000,
+        //     speed:300,
+        //     slidesToShow:1,
+        //     slidesToScroll:1,
+        //     pauseOnHover:true,
+        //     dots:true,
+        //     pauseOnDotsHover:true,
+        //     cssEase:'linear',
+        //     // fade:true,
+        //     draggable:true,
+        //     prevArrow:'<button class="PrevArrow"></button>',
+        //     nextArrow:'<button class="NextArrow"></button>',
+        // });
 
     })
 
@@ -146,10 +186,10 @@
             }
         });
 
-        $(".shopping__cart__inner").mCustomScrollbar({
-            theme: "light",
-            scrollInertia: 200
-        });
+        // $(".shopping__cart__inner").mCustomScrollbar({
+        //     theme: "light",
+        //     scrollInertia: 200
+        // });
 
         /*------------------------------------
              Shopping Cart
@@ -454,40 +494,54 @@
     -----------------------------------------*/
 
     // SLICK
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        fade: true,
-        asNavFor: '.slider-nav',
-        nextArrow: '<div class="slick-next"><i class="las la-angle-right"></i></div>',
-        prevArrow: '<div class="slick-prev"><i class="las la-angle-left"></i></div>',
-    });
-    $('.slider-nav').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: false,
-        focusOnSelect: true,
-        arrows: false,
-        vertical: true,
+    // $('.slider-for').slick({
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     fade: true,
+    //     asNavFor: '.slider-nav',
+    //     nextArrow: '<div class="slick-next"><i class="las la-angle-right"></i></div>',
+    //     prevArrow: '<div class="slick-prev"><i class="las la-angle-left"></i></div>',
+    // });
+    // $('.slider-nav').slick({
+    //     slidesToShow: 4,
+    //     slidesToScroll: 1,
+    //     asNavFor: '.slider-for',
+    //     dots: false,
+    //     focusOnSelect: true,
+    //     arrows: false,
+    //     vertical: true,
+    // });
+
+
+
+    $(document).ready(function () {
+        console.log("Document ready. Initializing Zoom...");
+
+        if ($.fn.zoom) {
+                // ZOOM
+            $('.ex1').zoom();
+
+            // STYLE GRAB
+            $('.ex2').zoom({
+                on: 'grab'
+            });
+
+            // STYLE CLICK
+            $('.ex3').zoom({
+                on: 'click'
+            });
+
+            // STYLE TOGGLE
+            $('.ex4').zoom({
+                on: 'toggle'
+            });
+
+            console.log("jQuery Zoom initialized successfully!");
+        } else {
+            console.error("jQuery Zoom is not loaded!");
+        }
     });
 
-    // ZOOM
-    $('.ex1').zoom();
 
-    // STYLE GRAB
-    $('.ex2').zoom({
-        on: 'grab'
-    });
-
-    // STYLE CLICK
-    $('.ex3').zoom({
-        on: 'click'
-    });
-
-    // STYLE TOGGLE
-    $('.ex4').zoom({
-        on: 'toggle'
-    });
 
 }(jQuery));
