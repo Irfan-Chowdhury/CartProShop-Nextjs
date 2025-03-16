@@ -93,8 +93,17 @@ export default async function Home() {
                         <div className="col-md-12 text-center">
                             <ul className="nav nav-tabs product-details-tab" id="lionTab" role="tablist">
                                 {homeData.productDetailsTab.productTabs.map((item, key) => (
+                                    
                                     <li className="nav-item" key={key}>
-                                        <a className={key === 0 ? "nav-link active" : "nav-link"} data-bs-toggle="tab" href={item.key} role="tab" aria-selected="true">{item.title}</a>
+                                        <a
+                                            id={"tab-" + item.key} // ✅ Corrected string concatenation
+                                            className={`nav-link ${key === 0 ? "active" : ""}`}
+                                            data-bs-toggle="tab"
+                                            href={`#${item.key}`} // ✅ Added # before item.key
+                                            role="tab"
+                                            aria-controls={item.key}
+                                            aria-selected={key === 0 ? "true" : "false"}
+                                        >{item.title}</a>
                                     </li>
                                 ))}
                             </ul>
@@ -109,11 +118,17 @@ export default async function Home() {
                         <div className="col-md-12">
                             <div className="tab-content mt-3" id="lionTabContent">
                                 {homeData.productDetailsTab.productTabs.map((item, key) => (
-                                    <div key={key} className={`tab-pane fade ${key === 0 ? "show active" : ""}`} id={item.key} role="tabpanel" aria-labelledby="all-tab">
-                                        <div class="product-slider-wrapper swiper-container">
-                                            <div class="swiper-wrapper">
+                                    <div 
+                                        key={key} 
+                                        className={`tab-pane fade ${key === 0 ? "show active" : ""}`} 
+                                        id={item.key} 
+                                        role="tabpanel" 
+                                        aria-labelledby={`tab-${item.key}`}
+                                    >
+                                        <div className="product-slider-wrapper swiper-container">
+                                            <div className="swiper-wrapper">
                                                 {item.categoryWithProducts.products.map((product, index) => (
-                                                    <div class="swiper-slide">
+                                                    <div className="swiper-slide" key={index}>
                                                         <form key={index} action="/" className="addToCart" method="post">
                                                             <input type="hidden" name="product_id" value={product.productId} />
                                                             <input type="hidden" name="product_slug" value={product.slug} />
