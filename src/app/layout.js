@@ -1,14 +1,18 @@
 
 import Layout from "./components/Layout";
+import MetaTags from "./components/MetaTags";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, meta  }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="LionCoders" />
-        <title>CartPro</title>
+        
+          {/* Dynamic Meta Tags */}
+          <MetaTags meta={meta} />
+
         <link rel="icon" type="image/png" href="/assets/favicon.png" />
 
         {/* Stylesheets */}
@@ -34,7 +38,10 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Layout>
+
+          {/* Main Page Content */}
           {children}
+          
         </Layout>
       </body>
     </html>

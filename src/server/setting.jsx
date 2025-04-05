@@ -10,7 +10,7 @@ export const getCommonHeaderData = async () => {
             return null;
         }
         const result = await response.json();
-        console.log("📦 JSON result:", result.data);
+        // console.log("📦 JSON result:", result.data);
 
         return result.data;
     } catch (error) {

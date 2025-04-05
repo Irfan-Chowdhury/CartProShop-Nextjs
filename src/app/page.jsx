@@ -1,5 +1,6 @@
 import { getHomeData } from "@/server/home";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -137,7 +138,7 @@ export default async function Home() {
 
                                                                 <div className="single-product-wrapper">
                                                                     <div className="single-product-item">
-                                                                        <a className="product-name" href={`${product.slug}/${item.categoryWithProducts.categoryId}`}>
+                                                                        <Link className="product-name" href={`product/${product.slug}`}>
                                                                             <Image
                                                                                 alt="Product Image"
                                                                                 src={product.mediumImage}
@@ -145,7 +146,7 @@ export default async function Home() {
                                                                                 width={720}
                                                                                 height={660}
                                                                             />
-                                                                        </a>
+                                                                        </Link>
 
                                                                         {product.manageStock === 1 && product.qty === 0 || product.inStock === 0 ? (
                                                                             <div className="product-promo-text style1 bg-danger">
